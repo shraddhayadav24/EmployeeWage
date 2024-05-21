@@ -1,54 +1,28 @@
 package com.employeewage.uc;
+public class EmployeeWage{
+private double empwageperhour;
+private int workinghoursperday;
+private int workingdayspermonth;
 
-class CompanyEmpWage {
-    private String companyName;
-    private double wagePerHour;
-    private int workingDaysPerMonth;
-    private int workingHoursPerDay;
-    private double totalWage;
 
-    public CompanyEmpWage(String companyName, double wagePerHour, int workingDaysPerMonth, int workingHoursPerDay) {
-        this.companyName = companyName;
-        this.wagePerHour = wagePerHour;
-        this.workingDaysPerMonth = workingDaysPerMonth;
-        this.workingHoursPerDay = workingHoursPerDay;
-    }
-
-    public double calculateEmployeeWage() {
-        int totalWorkingHours = workingDaysPerMonth * workingHoursPerDay;
-        this.totalWage = totalWorkingHours * wagePerHour;
-        return this.totalWage;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
+public EmployeeWage(double empwageperhour, int workinghoursperday, int workingdayspermonth) {
+	this.empwageperhour=empwageperhour;
+	this.workingdayspermonth=workingdayspermonth;
+	this.workinghoursperday=workinghoursperday;
 }
 
-public class EmployeeWage {
-    private static final int MAX_COMPANIES = 4;
-    private static int numOfCompanies = 0;
-    private static CompanyEmpWage[] companyEmpWages = new CompanyEmpWage[MAX_COMPANIES];
+public static double CalculateEmpwageCompanies(double empwageperhour, int workinghoursperday, int workingdayspermonth) {
+	int totalworkinghours= workinghoursperday * workingdayspermonth;
+	double totalWage= totalworkinghours * empwageperhour;
+	return totalWage;
+}
 
-    public static void addCompanyEmpWage(String companyName, double wagePerHour, int workingDaysPerMonth, int workingHoursPerDay) {
-        if (numOfCompanies < MAX_COMPANIES) {
-            companyEmpWages[numOfCompanies] = new CompanyEmpWage(companyName, wagePerHour, workingDaysPerMonth, workingHoursPerDay);
-            numOfCompanies++;
-        } else {
-            System.out.println("Invalid Company");
-        }
-    }
-
-    public static void computeEmployeeWages() {
-        for (int i = 0; i < numOfCompanies; i++) {
-            double totalWage = companyEmpWages[i].calculateEmployeeWage();
-            System.out.println(companyEmpWages[i].getCompanyName() + " total employee wage is: " + totalWage);
-        }
-    }
-
-    public static void main(String[] args) {
-        addCompanyEmpWage("TCS", 15, 20, 8); 
-        addCompanyEmpWage("Wipro", 20, 22, 7);
-        computeEmployeeWages();
-    }
+public static void main(String[] args) {
+	double Company1 =EmployeeWage.CalculateEmpwageCompanies(15.0, 8, 30);
+	System.out.println("The total EmpWage for Cpmpany 1:  " + Company1);
+	
+	double Company2 =EmployeeWage.CalculateEmpwageCompanies(10.0, 8, 20);
+	System.out.println("The total EmpWage for Cpmpany 2:  "+Company2);
+	
+}
 }
