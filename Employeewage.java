@@ -1,5 +1,10 @@
 package com.employeewage.uc;
 
+interface EmpWage{
+	public void addCompany(String CompanyName);
+	public void CalculateEmpWage(int companyindex, int workhourperday, int workhourperrate);
+}
+
 class CompanyEmpWage{
 	private String CompanyName;
 	private double totalEmpWage;
@@ -23,7 +28,7 @@ class CompanyEmpWage{
 }
 
 
-public class EmployeeWage {
+public class EmployeeWage implements EmpWage {
 	 private CompanyEmpWage[] companyEmpWages;
 	 private int numofCompanies;
 	 
@@ -62,5 +67,3 @@ public class EmployeeWage {
 	        System.out.println("Total wage for " + empWageBuilder.companyEmpWages[1].getCompanyName() + ": " + empWageBuilder.gettotalEmpWage(1));
 	    }
 	}
-
-
