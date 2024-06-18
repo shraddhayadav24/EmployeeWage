@@ -5,6 +5,7 @@ import java.util.ArrayList;
 interface EmpWage {
     public void addCompany(String CompanyName);
     public void CalculateEmpWage(int companyindex, int workhourperday, int workhourperrate);
+    public double getTotalWageByCompany(String companyName);
 }
 
 class CompanyEmpWage {
@@ -61,6 +62,15 @@ public class EmployeeWage implements EmpWage {
         return companyEmpWages.get(companyIndex).gettotalEmpWage();
     }
 
+    public double getTotalWageByCompany(String companyName) {
+        for (CompanyEmpWage companyEmpWage : companyEmpWages) {
+            if (companyEmpWage.getCompanyName().equals(companyName)) {
+                return companyEmpWage.gettotalEmpWage();
+            }
+        }
+        return 0.0; // Return 0 if company name is not found
+    }
+
     public static void main(String[] args) {
         EmployeeWage empWageBuilder = new EmployeeWage();
         empWageBuilder.addCompany("TCS");
@@ -75,5 +85,9 @@ public class EmployeeWage implements EmpWage {
         empWageBuilder.CalculateEmpWage(1, 35, 22);
         System.out.println("Total wage for " + empWageBuilder.companyEmpWages.get(1).getCompanyName() + ": " + empWageBuilder.gettotalEmpWage(1));
         System.out.println("Daily wages for " + empWageBuilder.companyEmpWages.get(1).getCompanyName() + ": " + empWageBuilder.companyEmpWages.get(1).getDailyWages());
+
+        // Query total wage by company name
+        String queryCompany = "TCS";
+        System.out.println("Total wage for " + queryCompany + ": " + empWageBuilder.getTotalWageByCompany(queryCompany));
     }
 }
