@@ -1,5 +1,7 @@
 package com.employeewage.uc;
 
+import java.util.ArrayList;
+
 interface EmpWage{
 	public void addCompany(String CompanyName);
 	public void CalculateEmpWage(int companyindex, int workhourperday, int workhourperrate);
@@ -29,26 +31,36 @@ class CompanyEmpWage{
 
 
 public class EmployeeWage implements EmpWage {
-	 private CompanyEmpWage[] companyEmpWages;
-	 private int numofCompanies;
-	 
+//	private CompanyEmpWage[] companyEmpWages;
+//	 private int numofCompanies;
+		
+	private ArrayList<CompanyEmpWage> companyEmpWages;
+	
+
 	 public EmployeeWage() {
-		 companyEmpWages =new CompanyEmpWage[5];
-		 numofCompanies=0;
+		 
+		 companyEmpWages=new ArrayList<>();
+		 
+//		 companyEmpWages =new CompanyEmpWage[5];
+//		 numofCompanies=0;
 	 }
 	 
 	 public void addCompany(String CompanyName) {
-		 companyEmpWages[numofCompanies]= new CompanyEmpWage(CompanyName);
-		 numofCompanies++;
+//		 companyEmpWages[numofCompanies]= new CompanyEmpWage(CompanyName);
+//		  numofCompanies++;
+		 companyEmpWages.add(new CompanyEmpWage(CompanyName));
 	 }
 	 
 	 public void CalculateEmpWage(int companyindex, int workhourperday, int workhourperrate) {
 		 double wage= workhourperday * workhourperrate;
-		 companyEmpWages[companyindex].settotalEmpWage(companyEmpWages[companyindex].gettotalEmpWage() + wage);
-		 
+		// companyEmpWages[companyindex].settotalEmpWage(companyEmpWages[companyindex].gettotalEmpWage() + wage);
+		 CompanyEmpWage companyEmpWage=companyEmpWages.get(companyindex);
+		 companyEmpWage.settotalEmpWage(companyEmpWage.gettotalEmpWage() + wage);
 	 }
+	 
+	 
 	 public double gettotalEmpWage(int companyIndex) {
-	        return companyEmpWages[companyIndex].gettotalEmpWage();
+	        return companyEmpWages.get(companyIndex).gettotalEmpWage();
 	    }
 	
 	 public static void main(String[] args) {
@@ -59,11 +71,11 @@ public class EmployeeWage implements EmpWage {
 	        
 	        empWageBuilder.CalculateEmpWage(0, 40, 15);
 	        empWageBuilder.CalculateEmpWage(0, 30, 20);
-	        System.out.println("Total wage for " + empWageBuilder.companyEmpWages[0].getCompanyName() + ": " + empWageBuilder.gettotalEmpWage(0));
+	        System.out.println("Total wage for " + empWageBuilder.companyEmpWages.get(0).getCompanyName() + ": " + empWageBuilder.gettotalEmpWage(0));
 
 	        
 	        empWageBuilder.CalculateEmpWage(1, 45, 18);
 	        empWageBuilder.CalculateEmpWage(1, 35, 22);
-	        System.out.println("Total wage for " + empWageBuilder.companyEmpWages[1].getCompanyName() + ": " + empWageBuilder.gettotalEmpWage(1));
+	        System.out.println("Total wage for " + empWageBuilder.companyEmpWages.get(1).getCompanyName() + ": " + empWageBuilder.gettotalEmpWage(1));
 	    }
 	}
